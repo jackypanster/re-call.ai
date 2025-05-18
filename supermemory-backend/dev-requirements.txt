@@ -1,1 +1,5 @@
-pytest 
+pytest
+supabase
+fastapi
+uvicorn
+python-dotenv
