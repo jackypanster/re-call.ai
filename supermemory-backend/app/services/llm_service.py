@@ -45,3 +45,6 @@ class LLMService:
 
 # 单例实例
 llm_service = LLMService()
+
+def get_llm_service():
+    return llm_service

@@ -45,3 +45,6 @@ class MemoryService:
 
 # 单例实例
 memory_service = MemoryService()
+
+def get_memory_service():
+    return memory_service

@@ -37,3 +37,6 @@ try:
 except Exception as e:
     db_service = None
     logging.error("Supabase client not initialized.")
+
+def get_db_service():
+    return db_service

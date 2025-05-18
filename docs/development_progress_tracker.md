@@ -136,7 +136,7 @@ Progress tracking:
 - Summarization function returns valid results
 - Error handling works for API failures
 
-### 13. ⬜ Implement Supermemory.ai integration
+### 13. ✅ Implement Supermemory.ai integration
 **Tasks:**
 - Create `app/services/memory_service.py`
 - Implement methods for adding and searching memories
@@ -147,7 +147,7 @@ Progress tracking:
 - Content can be added to Supermemory
 - Semantic search returns expected results
 
-### 14. ⬜ Set up service dependency injection
+### 14. ✅ Set up service dependency injection
 **Tasks:**
 - Implement dependency injection for services in FastAPI
 - Configure service lifespans
