@@ -1,0 +1,6 @@
+pytest
+pytest-cov
+mypy
+black
+isort
+flake8 
