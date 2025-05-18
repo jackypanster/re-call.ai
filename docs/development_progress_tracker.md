@@ -101,7 +101,7 @@ Progress tracking:
 - Models can be serialized/deserialized
 - Model validation works as expected
 
-### 10. ⬜ Set up API router structure
+### 10. ✅ Set up API router structure
 **Tasks:**
 - Create router files in `app/api/`
 - Set up API versioning
