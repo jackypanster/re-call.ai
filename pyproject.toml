@@ -1,0 +1,24 @@
+[project]
+name = "re-call-ai"
+version = "0.1.0"
+description = "AI-powered personal memory management system"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mem0ai>=0.1.102",
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "pydantic>=2.5.0",
+    "httpx>=0.25.0",
+    "python-dotenv>=1.0.0",
+    "pytest>=7.4.0",
+    "python-multipart>=0.0.6",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.1.0",
+    "black>=23.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-httpx>=0.26.0",
+]

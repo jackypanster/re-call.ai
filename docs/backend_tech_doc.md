@@ -2,12 +2,13 @@
 
 ## 📚 Overview
 
-This document outlines the technical implementation details for the re-call (SuperMemory) backend service, a personal second-brain system designed to capture, summarize, classify, and retrieve textual information using AI.
+This document outlines the technical implementation details for the re-call.ai backend service, an AI-powered personal memory management system designed to capture, organize, and retrieve textual information using advanced AI services.
 
-**Project Codename:** re-call  
+**Project Name:** re-call.ai  
 **Service Type:** REST API  
 **Primary Framework:** FastAPI  
-**Deployment Strategy:** SaaS-first approach  
+**Core Memory Service:** mem0 Platform  
+**Deployment Strategy:** Cloud-native SaaS approach  
 
 ## 🏗️ System Architecture
 
@@ -26,14 +27,14 @@ This document outlines the technical implementation details for the re-call (Sup
       ┌─────────┼─────────┬─────────┐
       ▼                   ▼         ▼
 ┌────────────┐    ┌─────────────┐  ┌─────────────┐
-│ LLM Service│    │Memory Service│  │Database Svc │
-│(Summary/Tag)│    │(Supermemory)│  │(Supabase)   │
+│ Voice/LLM  │    │Memory Service│  │Database Svc │
+│ Services   │    │   (mem0)     │  │(PostgreSQL) │
 └────────────┘    └─────────────┘  └─────────────┘
       │                 │               │
       ▼                 ▼               ▼
 ┌────────────┐    ┌─────────────┐  ┌─────────────┐
-│OpenRouter/ │    │Supermemory.ai│  │PostgreSQL   │
-│OpenAI      │    │Vector Store  │  │(via Supabase)│
+│OpenAI      │    │mem0 Platform│  │Supabase/    │
+│Whisper API │    │AI Memory    │  │Railway DB   │
 └────────────┘    └─────────────┘  └─────────────┘
 ```
 
@@ -48,16 +49,16 @@ supermemory-backend/
 │   ├── api/                    # API routes
 │   │   ├── __init__.py
 │   │   ├── auth.py             # Authentication endpoints
-│   │   ├── records.py          # Record management endpoints
+│   │   ├── memories.py         # Memory management endpoints
 │   │   └── search.py           # Search endpoints
 │   ├── services/               # Service layer
 │   │   ├── __init__.py
-│   │   ├── llm_service.py      # LLM service for summarization/tagging
-│   │   ├── memory_service.py   # Supermemory.ai integration
-│   │   └── database.py         # Supabase integration
+│   │   ├── voice_service.py    # Voice-to-text service (Whisper)
+│   │   ├── memory_service.py   # mem0 platform integration
+│   │   └── database.py         # Database integration
 │   ├── models/                 # Data models
 │   │   ├── __init__.py
-│   │   ├── record.py           # Record model
+│   │   ├── memory.py           # Memory model
 │   │   └── user.py             # User model
 │   └── utils/                  # Utility functions
 │       ├── __init__.py
@@ -80,11 +81,12 @@ supermemory-backend/
 |-----------|------------|-------------|
 | API Framework | FastAPI | High-performance Python API framework |
 | Runtime | Uvicorn | ASGI server for FastAPI |
-| Deployment | Railway/Render | Cloud platforms for hosting |
-| LLM Integration | OpenRouter API | Unified API for accessing multiple LLMs |
-| Vector Storage | Supermemory.ai | RAG system for vector search |
-| Database | Supabase (PostgreSQL) | Storage for user data and metadata |
-| Authentication | JWT + Supabase Auth | Token-based authentication |
+| Deployment | Railway/Vercel | Cloud platforms for hosting |
+| AI Memory | mem0 Platform | Advanced AI memory management service |
+| Voice Processing | OpenAI Whisper API | Speech-to-text conversion |
+| Database | PostgreSQL | Storage for user data and metadata |
+| Authentication | JWT + Auth0/Supabase | Token-based authentication |
+| Caching | Redis | Session and API response caching |
 | Testing | Pytest | Unit and integration testing |
 | CI/CD | GitHub Actions | Automated testing and deployment |
 

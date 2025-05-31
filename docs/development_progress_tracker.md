@@ -136,16 +136,17 @@ Progress tracking:
 - Summarization function returns valid results
 - Error handling works for API failures
 
-### 13. ✅ Implement Supermemory.ai integration
+### 13. ✅ Implement mem0 integration
 **Tasks:**
 - Create `app/services/memory_service.py`
-- Implement methods for adding and searching memories
-- Handle response parsing
+- Implement mem0 API integration for adding and searching memories
+- Handle response parsing and error management
 
 **Acceptance Criteria:**
-- Service can connect to Supermemory.ai API
-- Content can be added to Supermemory
-- Semantic search returns expected results
+- Service can connect to mem0 Platform API
+- Content can be added to mem0 with metadata
+- Semantic search with filters returns expected results
+- Advanced features (history, batch operations) work correctly
 
 ### 14. ✅ Set up service dependency injection
 **Tasks:**
@@ -190,7 +191,7 @@ Progress tracking:
 **Acceptance Criteria:**
 - Records can be created with valid content
 - Invalid requests are rejected with appropriate error messages
-- Created records are stored in database and Supermemory.ai
+- Created records are stored in database and mem0 platform
 
 ### 18. ⬜ Implement LLM processing pipeline
 **Tasks:**
