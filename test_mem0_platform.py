@@ -40,8 +40,8 @@ def test_add_memories(client):
         },
         {
             "messages": [
-                {"role": "user", "content": "I'm evaluating mem0 as an alternative to supermemory for our project."},
-                {"role": "assistant", "content": "That's a smart approach! I'll remember you're comparing mem0 with supermemory for your project needs."}
+                        {"role": "user", "content": "I'm building re-call.ai, an AI-powered personal memory management system using mem0."},
+        {"role": "assistant", "content": "That's exciting! I'll remember you're building re-call.ai with mem0 as the core memory service."}
             ],
             "user_id": "developer_001", 
             "metadata": {"category": "evaluation", "language": "en"}
@@ -82,7 +82,7 @@ def test_search_memories(client):
     
     search_queries = [
         "re-call.ai项目",
-        "supermemory alternative", 
+                    "AI memory management", 
         "search functionality",
         "AI memory management",
         "project evaluation"
@@ -237,7 +237,7 @@ def main():
     
     print("\n🎉 mem0平台测试完成!")
     print("📊 测试总结:")
-    print("   ✅ 如果大部分测试通过，mem0是supermemory的优秀替代方案")
+    print("   ✅ 如果大部分测试通过，mem0是re-call.ai项目的理想选择")
     print("   ✅ 特别关注搜索功能的稳定性和准确性")
     print("   ✅ mem0提供了更丰富的过滤和管理功能")
 

@@ -1,15 +1,12 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
-    api_host: str
-    api_port: int
-    debug: bool
+    api_host: str = "0.0.0.0"
+    api_port: int = 8000
+    debug: bool = True
     secret_key: str
-    openrouter_api_key: str
-    preferred_model: str
-    supermemory_api_key: str
-    supabase_url: str
-    supabase_key: str
+    mem0_api_key: str
+    openai_api_key: str = ""
     log_level: str = "INFO"
 
     model_config = SettingsConfigDict(

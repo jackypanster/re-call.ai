@@ -16,7 +16,6 @@ re-call.ai 是一个基于AI的个人记忆管理系统，通过集成先进的A
 - **后端框架**：FastAPI + Python 3.11+
 - **AI记忆服务**：mem0 Platform
 - **语音处理**：OpenAI Whisper API
-- **数据库**：PostgreSQL + Redis
 - **前端**：Next.js + TailwindCSS
 - **部署**：Railway/Vercel
 
@@ -66,10 +65,6 @@ uv pip install -e .
 # mem0配置
 MEM0_API_KEY=m0-your-api-key-here
 
-# 数据库配置  
-DATABASE_URL=postgresql://user:pass@host:port/db
-REDIS_URL=redis://localhost:6379
-
 # OpenAI配置（语音转文本）
 OPENAI_API_KEY=sk-your-openai-key
 
@@ -81,7 +76,7 @@ JWT_SECRET_KEY=your-secret-key
 
 ```bash
 # 启动开发服务器
-cd supermemory-backend
+cd re-call-backend
 uvicorn app.main:app --reload
 
 # 或运行测试
@@ -155,7 +150,6 @@ docs/
 - [mem0 Platform](https://mem0.ai/) - 核心AI记忆服务
 - [FastAPI 文档](https://fastapi.tiangolo.com/) - API框架
 - [OpenAI Whisper](https://openai.com/research/whisper) - 语音转文本
-- [PostgreSQL](https://www.postgresql.org/) - 数据库
 - [uv 包管理器](https://astral.sh/blog/uv) - Python包管理
 
 ---

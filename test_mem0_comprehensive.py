@@ -238,7 +238,7 @@ def main():
     
     print("\n🎉 mem0 API全面测试完成!")
     print("📊 测试总结:")
-    print("   ✅ 如果大部分测试通过，mem0可以作为supermemory的优秀替代")
+    print("   ✅ 如果大部分测试通过，mem0是re-call.ai项目的最佳选择")
     print("   ✅ 特别关注搜索功能是否正常工作")
 
 if __name__ == "__main__":

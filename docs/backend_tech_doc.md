@@ -28,7 +28,7 @@ This document outlines the technical implementation details for the re-call.ai b
       ▼                   ▼         ▼
 ┌────────────┐    ┌─────────────┐  ┌─────────────┐
 │ Voice/LLM  │    │Memory Service│  │Database Svc │
-│ Services   │    │   (mem0)     │  │(PostgreSQL) │
+│ Services   │    │   (mem0)     │  │             │
 └────────────┘    └─────────────┘  └─────────────┘
       │                 │               │
       ▼                 ▼               ▼
@@ -41,7 +41,7 @@ This document outlines the technical implementation details for the re-call.ai b
 ### Directory Structure
 
 ```
-supermemory-backend/
+re-call-backend/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py                 # FastAPI entry point
@@ -84,9 +84,7 @@ supermemory-backend/
 | Deployment | Railway/Vercel | Cloud platforms for hosting |
 | AI Memory | mem0 Platform | Advanced AI memory management service |
 | Voice Processing | OpenAI Whisper API | Speech-to-text conversion |
-| Database | PostgreSQL | Storage for user data and metadata |
-| Authentication | JWT + Auth0/Supabase | Token-based authentication |
-| Caching | Redis | Session and API response caching |
+| Authentication | JWT | Token-based authentication |
 | Testing | Pytest | Unit and integration testing |
 | CI/CD | GitHub Actions | Automated testing and deployment |
 
@@ -101,7 +99,7 @@ class Record:
     summary: str           # One-sentence summary (LLM-generated)
     keywords: List[str]    # 3-5 keywords (LLM-generated)
     tags: List[str]        # Classification tags (LLM-generated)
-    embedding_id: str      # Reference to vector in Supermemory
+    memory_id: str         # Reference to memory in mem0
     user_id: str           # Owner of the record
     created_at: datetime   # Creation timestamp
     updated_at: datetime   # Last update timestamp
@@ -130,56 +128,41 @@ Integration method:
 - REST API calls via HTTP client
 - Authentication via API key in request headers
 
-### 2. Supermemory.ai
+### 2. mem0 Platform
 
 Used for:
-- Vector storage of text content
-- Semantic search capabilities
+- AI-powered memory storage
+- Intelligent semantic search
+- Automatic memory organization
 
 Integration method:
-- REST API calls to Supermemory.ai endpoints
+- mem0 Python SDK
 - Sample integration code:
 
 ```python
+from mem0 import Memory
+
+# Initialize mem0 client
+memory = Memory()
+
 # Adding a memory
-async def add_memory(content: str, metadata: dict = None):
-    url = "https://api.supermemory.ai/v3/memories"
-    headers = {
-        "Authorization": f"Bearer {config.SUPERMEMORY_API_KEY}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "content": content,
-        "metadata": metadata or {}
-    }
-    response = await httpx.post(url, json=payload, headers=headers)
-    return response.json()
+async def add_memory(content: str, user_id: str, metadata: dict = None):
+    result = memory.add(
+        messages=[{"role": "user", "content": content}],
+        user_id=user_id,
+        metadata=metadata or {}
+    )
+    return result
 
 # Searching memories
-async def search_memories(query: str, limit: int = 10):
-    url = "https://api.supermemory.ai/v3/memories"
-    headers = {
-        "Authorization": f"Bearer {config.SUPERMEMORY_API_KEY}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "q": query,
-        "limit": limit
-    }
-    response = await httpx.get(url, json=payload, headers=headers)
-    return response.json()
+async def search_memories(query: str, user_id: str, limit: int = 10):
+    results = memory.search(
+        query=query,
+        user_id=user_id,
+        limit=limit
+    )
+    return results
 ```
-
-### 3. Supabase
-
-Used for:
-- User authentication
-- Storing record metadata
-- Managing relationships between entities
-
-Integration method:
-- Supabase Python client
-- Connection established at application startup
 
 ## 🚪 API Endpoints
 
@@ -223,12 +206,8 @@ SECRET_KEY=your-secret-key
 OPENROUTER_API_KEY=your-openrouter-api-key
 PREFERRED_MODEL=claude-3-opus-20240229
 
-# Supermemory.ai
-SUPERMEMORY_API_KEY=your-supermemory-api-key
-
-# Supabase
-SUPABASE_URL=your-supabase-url
-SUPABASE_KEY=your-supabase-key
+# mem0 Platform
+MEM0_API_KEY=your-mem0-api-key
 
 # Logging
 LOG_LEVEL=INFO
@@ -257,23 +236,22 @@ LOG_LEVEL=INFO
 
 ## 🔄 Data Flow
 
-### Record Creation Process
+### Memory Creation Process
 
-1. Client sends text content to `/api/records` endpoint
-2. Backend saves raw content to Supabase
-3. Backend sends content to LLM service for summarization and tagging
-4. Backend updates record with summary and tags
-5. Backend sends content to Supermemory.ai for vectorization
-6. Backend updates record with vector reference ID
-7. Client receives complete record details
+1. Client sends text content to `/api/memories` endpoint
+2. Backend processes content and extracts metadata
+3. Backend sends content to mem0 for intelligent storage
+4. mem0 automatically handles vectorization and organization
+5. Backend receives memory ID from mem0
+6. Client receives confirmation with memory details
 
 ### Search Process
 
-1. Client sends query to `/api/search` endpoint
-2. Backend forwards query to Supermemory.ai for semantic search
-3. Backend retrieves matching vector IDs
-4. Backend queries Supabase for full record details using IDs
-5. Client receives list of records sorted by relevance
+1. Client sends query to `/api/memories/search` endpoint
+2. Backend forwards query to mem0 for semantic search
+3. mem0 performs intelligent search across user's memories
+4. Backend receives ranked results from mem0
+5. Client receives list of memories sorted by relevance
 
 ## 🧪 Testing
 
@@ -317,8 +295,8 @@ pytest
 ## 📚 Additional Resources
 
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
-- [Supermemory.ai API Documentation](https://docs.supermemory.ai/)
-- [Supabase Documentation](https://supabase.io/docs)
+- [mem0 Platform Documentation](https://docs.mem0.ai/)
+
 
 ---
 

@@ -41,7 +41,7 @@ re-call.ai 是一个基于AI的个人记忆管理系统，通过集成先进的A
 | **后端** | FastAPI + Python | 高性能API服务 |
 | **AI记忆** | mem0 Platform | 核心记忆管理服务 |
 | **语音处理** | OpenAI Whisper | 语音转文本服务 |
-| **数据库** | PostgreSQL + Redis | 元数据存储和缓存 |
+| **AI记忆** | mem0 Platform | 智能记忆存储和检索 |
 | **部署** | Railway/Vercel | 云原生部署平台 |
 
 ### 数据流设计
@@ -153,5 +153,5 @@ re-call.ai 是一个基于AI的个人记忆管理系统，通过集成先进的A
 
 **文档更新记录**
 - 2024年12月：基于mem0平台重新设计产品架构
-- 移除SuperMemory概念，采用re-call.ai品牌
+- 基于mem0 Platform构建，提供稳定的AI记忆服务
 - 专注核心记忆管理价值，简化功能设计

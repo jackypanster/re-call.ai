@@ -6,9 +6,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api import auth, records, search
 
 app = FastAPI(
-    title="SuperMemory API",
-    description="Backend service for the re-call (SuperMemory) project.",
-    version="0.1.0"
+    title="re-call.ai API",
+    description="Backend service for the re-call.ai AI memory management system.",
+    version="1.0.0"
 )
 
 app.include_router(auth.router, prefix="/api/v1")
@@ -17,7 +17,7 @@ app.include_router(search.router, prefix="/api/v1")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 可根据实际需求调整
+    allow_origins=["*"],  # Configure appropriately for production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -25,7 +25,11 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-    return {"message": "SuperMemory API is running."}
+    return {"message": "re-call.ai API is running."}
+
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy", "service": "re-call.ai API"}
 
 @app.exception_handler(AppException)
 async def app_exception_handler(request: Request, exc: AppException):

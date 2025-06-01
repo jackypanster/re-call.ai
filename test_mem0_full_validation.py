@@ -38,8 +38,8 @@ def test_1_add_memories(client):
         {
             "name": "中文项目记忆",
             "messages": [
-                {"role": "user", "content": "我正在开发re-call.ai项目，这是一个基于AI的个人记忆管理系统。我们正在评估mem0作为supermemory的替代方案。"},
-                {"role": "assistant", "content": "很好！我记住了你正在开发re-call.ai项目，这是一个AI记忆管理系统，你们正在考虑用mem0替代supermemory。"}
+                        {"role": "user", "content": "我正在开发re-call.ai项目，这是一个基于AI的个人记忆管理系统，使用mem0作为核心记忆服务。"},
+        {"role": "assistant", "content": "很好！我记住了你正在开发re-call.ai项目，这是一个AI记忆管理系统，使用mem0作为核心技术。"}
             ],
             "user_id": "developer_test",
             "metadata": {"category": "project", "language": "chinese", "priority": "high"}
@@ -389,7 +389,7 @@ def generate_final_report(test_results):
     print("   • 文档准确性: ✅ 官方文档与实际API一致")
     
     print("\n🚀 推荐结论:")
-    print("   **mem0完全可以替代supermemory！**")
+    print("   **mem0完全满足re-call.ai项目需求！**")
     print("   建议立即开始re-call.ai项目的mem0集成工作。")
 
 def main():
