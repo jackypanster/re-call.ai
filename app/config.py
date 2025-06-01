@@ -5,7 +5,15 @@ class Settings(BaseSettings):
     api_port: int = 8000
     debug: bool = True
     secret_key: str
+    
+    # mem0配置
     mem0_api_key: str
+    
+    # Supabase Auth配置 (仅用于认证)
+    supabase_url: str = ""
+    supabase_key: str = ""
+    
+    # OpenAI配置
     openai_api_key: str = ""
     log_level: str = "INFO"
 

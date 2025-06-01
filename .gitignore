@@ -25,12 +25,18 @@ var/
 
 # Virtual environments
 venv/
+.venv/
 .env/
 ENV/
 env/
 
+# uv
+.uv/
+uv.lock
+
 # Pytest
 .cache/
+.pytest_cache/
 
 # Jupyter Notebook
 .ipynb_checkpoints
@@ -44,6 +50,7 @@ env/
 # Environment variables
 .env
 .env.*
+!.env.example
 
 # macOS
 .DS_Store
@@ -51,6 +58,35 @@ env/
 # Windows
 Thumbs.db
 Desktop.ini
+
+# mypy
+.mypy_cache/
+.dmypy.json
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Logs
+*.log
+
+# Docker
+*.pid
+
+# FastAPI specific
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Temporary files
+*.tmp
+*.temp
 
 # mypy
 .mypy_cache/
